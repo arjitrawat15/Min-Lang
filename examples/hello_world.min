@@ -1,0 +1,14 @@
+// Hello World Program in MinLang
+// Demonstrates basic I/O operations
+
+int main() {
+    int number;
+    
+    // Read a number from user
+    read(number);
+    
+    // Print the number
+    print(number);
+    
+    return 0;
+}
