@@ -1,4 +1,4 @@
-# 🚀 MinLang Compiler
+#  MinLang Compiler
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()
@@ -7,7 +7,7 @@
 
 > A comprehensive educational compiler for MinLang - a minimalist programming language designed for learning compiler construction principles.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -24,7 +24,7 @@
 - [Roadmap](#roadmap)
 - [License](#license)
 
-## 🎯 Overview
+##  Overview
 
 MinLang Compiler is an educational compiler implementation that demonstrates the complete pipeline of transforming high-level source code into executable instructions. Built from scratch in Python, it serves as a practical learning tool for understanding compiler design, language theory, and code generation.
 
@@ -36,16 +36,16 @@ MinLang Compiler is an educational compiler implementation that demonstrates the
 - **Well-Documented**: Extensive documentation and code comments
 - **Extensible**: Easy to add new language features
 
-## ✨ Features
+##  Features
 
 ### Core Compilation Phases
 
-- ✅ **Lexical Analysis**: Tokenization with comprehensive error handling
-- ✅ **Syntax Analysis**: Recursive descent parser with AST generation
-- 🚧 **Semantic Analysis**: Type checking and symbol table management
-- 🚧 **Intermediate Code Generation**: Three-address code (TAC) generation
-- 📋 **Optimization**: Constant folding and dead code elimination
-- 📋 **Code Generation**: Target code generation for stack machine
+-  **Lexical Analysis**: Tokenization with comprehensive error handling
+-  **Syntax Analysis**: Recursive descent parser with AST generation
+-  **Semantic Analysis**: Type checking and symbol table management
+-  **Intermediate Code Generation**: Three-address code (TAC) generation
+-  **Optimization**: Constant folding and dead code elimination
+-  **Code Generation**: Target code generation for stack machine
 
 ### Language Features
 
@@ -57,7 +57,7 @@ MinLang supports:
 - **Operators**: Arithmetic, relational, logical
 - **I/O Operations**: `read()` and `print()` statements
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -104,7 +104,7 @@ MinLang supports:
               Executable Code
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Clone the repository
@@ -124,7 +124,7 @@ python src/main.py examples/hello.ml --verbose
 python src/main.py examples/hello.ml --ast-output ast.png
 ```
 
-## 📦 Installation
+##  Installation
 
 ### Prerequisites
 
@@ -168,7 +168,7 @@ docker build -t minlang-compiler .
 docker run -v $(pwd)/examples:/examples minlang-compiler /examples/hello.ml
 ```
 
-## 💻 Usage
+## Usage
 
 ### Basic Compilation
 
@@ -234,7 +234,7 @@ int main() {
 }
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 minlang-compiler/
@@ -288,7 +288,7 @@ minlang-compiler/
 └── README.md
 ```
 
-## 🛠️ Development
+## Development
 
 ### Setting Up Development Environment
 
@@ -323,7 +323,7 @@ pytest tests/test_lexer.py
 ptw
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guidelines](docs/CONTRIBUTING.md) for details.
 
@@ -338,17 +338,9 @@ We welcome contributions! Please see our [Contributing Guidelines](docs/CONTRIBU
 7. Push to the branch (`git push origin feature/amazing-feature`)
 8. Open a Pull Request
 
-## 👥 Team
 
-| Name | Role | GitHub | Email |
-|------|------|--------|-------|
-| [Team Lead] | Project Lead, Architecture | @username | email@example.com |
-| [Member 2] | Lexer & Parser | @username | email@example.com |
-| [Member 3] | Semantic Analysis | @username | email@example.com |
-| [Member 4] | Code Generation | @username | email@example.com |
-| [Member 5] | Testing & Documentation | @username | email@example.com |
 
-## 📚 Documentation
+##  Documentation
 
 - [Architecture Overview](docs/ARCHITECTURE.md)
 - [Language Specification](docs/LANGUAGE_SPEC.md)
@@ -357,39 +349,39 @@ We welcome contributions! Please see our [Contributing Guidelines](docs/CONTRIBU
 - [Project Description](PROJECT_DESCRIPTION.md)
 - [GitHub Setup Guide](GITHUB_SETUP.md)
 
-## 🗺️ Roadmap
+##  Roadmap
 
-### Phase 1: Core Compiler (Current - 30% Complete)
-- [x] Lexical Analysis
-- [x] Token definitions and tokenizer
-- [x] Basic error handling
-- [x] Parser framework
+### Phase 1: Core Compiler
+- [ ] Lexical Analysis
+- [ ] Token definitions and tokenizer
+- [ ] Basic error handling
+- [ ] Parser framework
 - [ ] Complete syntax analysis
 - [ ] AST generation
 
-### Phase 2: Semantic Analysis (Planned)
+### Phase 2: Semantic Analysis
 - [ ] Symbol table implementation
 - [ ] Type checking
 - [ ] Scope resolution
 - [ ] Semantic error detection
 
-### Phase 3: Code Generation (Planned)
+### Phase 3: Code Generation 
 - [ ] Three-address code generation
 - [ ] Basic optimizations
 - [ ] Target code generation
 - [ ] Runtime environment
 
-### Phase 4: Advanced Features (Future)
+### Phase 4: Advanced Features
 - [ ] Array support
 - [ ] String operations
 - [ ] Advanced optimizations
 - [ ] Debugging support
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Inspired by classic compiler textbooks (Dragon Book, Tiger Book)
 - Built with educational purposes in mind
