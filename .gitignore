@@ -43,6 +43,12 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
+#files
+changes.md
+PROJECT_DESCRIPTION.md
+PROJECT_SUMMARY.md
+QUICKSTART.md
+
 # Project specific
 *.ml.tokens
 *.ml.ast
