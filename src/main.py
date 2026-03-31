@@ -7,11 +7,10 @@ Command-line interface for the MinLang compiler
 import argparse
 import sys
 from pathlib import Path
-from typing import Optional
 
-from lexer import Lexer, LexerError, tokenize_file
-from parser import Parser, ParserError, parse_file
-from parser.ast_nodes import ast_to_string
+from src.lexer import Lexer, LexerError
+from src.parser import Parser, ParserError, ast_to_string
+from src.semantic import SemanticAnalyzer, SemanticError
 
 # Version information
 VERSION = "0.1.0"
@@ -20,6 +19,7 @@ COMPILER_NAME = "MinLang Compiler"
 
 class CompilerError(Exception):
     """Base class for compiler errors"""
+
     pass
 
 
@@ -87,13 +87,25 @@ def compile_file(filename: str, args: argparse.Namespace) -> bool:
         if args.verbose:
             print("  AST generated successfully")
         
-        # Phase 3: Semantic Analysis (Not yet implemented)
+        # Phase 3: Semantic Analysis
         if args.verbose:
-            print("Phase 3: Semantic Analysis (TODO)")
-        
-        # Phase 4: Intermediate Code Generation (Not yet implemented)
+            print("Phase 3: Semantic Analysis")
+
+        semantic_analyzer = SemanticAnalyzer()
+        semantic_analyzer.analyze(ast)
+
         if args.verbose:
-            print("Phase 4: Code Generation (TODO)")
+            print("  Semantic checks passed")
+
+        # Phase 4+: deferred to future iterations.
+        if args.verbose:
+            print("Phase 4+: Intermediate code generation, optimization, and target code are pending")
+
+        if args.tac or args.optimize or args.output or args.run:
+            print(
+                "Note: this branch currently validates through semantic analysis only; "
+                "code generation stages are intentionally deferred."
+            )
         
         if args.verbose:
             print(f"\n✓ Compilation completed successfully")
@@ -106,6 +118,10 @@ def compile_file(filename: str, args: argparse.Namespace) -> bool:
     
     except ParserError as e:
         print(f"\n✗ Syntax Error: {e}", file=sys.stderr)
+        return False
+
+    except SemanticError as e:
+        print(f"\n✗ Semantic Error: {e}", file=sys.stderr)
         return False
     
     except Exception as e:
@@ -158,25 +174,25 @@ def main():
     parser.add_argument(
         '--tac',
         action='store_true',
-        help='print three-address code (not yet implemented)'
+        help='reserved for future phase (TAC output)'
     )
     
     parser.add_argument(
         '-O', '--optimize',
         action='store_true',
-        help='enable optimizations (not yet implemented)'
+        help='reserved for future phase (optimization)'
     )
     
     parser.add_argument(
         '-o', '--output',
         metavar='FILE',
-        help='output file for generated code'
+        help='reserved for future phase (target code output file)'
     )
     
     parser.add_argument(
         '--run',
         action='store_true',
-        help='run the compiled program (not yet implemented)'
+        help='reserved for future runtime execution support'
     )
     
     args = parser.parse_args()

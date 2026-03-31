@@ -68,7 +68,7 @@ class ErrorHandler:
             location = f"{filename}:"
         if line > 0:
             location += f"{line}:"
-        if self.column > 0:
+        if column > 0:
             location += f"{column}:"
         
         if location:

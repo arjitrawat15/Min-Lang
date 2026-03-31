@@ -50,6 +50,11 @@ class Program(ASTNode):
         super().__init__(NodeType.PROGRAM, line, column)
         self.declarations = declarations
 
+    @property
+    def functions(self) -> List[Any]:
+        """Backward-compatible view of top-level function declarations."""
+        return [decl for decl in self.declarations if isinstance(decl, FunctionDeclaration)]
+
 
 @dataclass
 class VariableDeclaration(ASTNode):
@@ -68,6 +73,15 @@ class VariableDeclaration(ASTNode):
         self.initializer = initializer
         self.is_const = is_const
 
+    @property
+    def type_name(self) -> str:
+        """Backward-compatible alias for var_type."""
+        return self.var_type
+
+    @type_name.setter
+    def type_name(self, value: str) -> None:
+        self.var_type = value
+
 
 @dataclass
 class ParameterDeclaration(ASTNode):
@@ -80,6 +94,15 @@ class ParameterDeclaration(ASTNode):
         super().__init__(NodeType.PARAM_DECL, line, column)
         self.param_type = param_type
         self.identifier = identifier
+
+    @property
+    def type_name(self) -> str:
+        """Backward-compatible alias for param_type."""
+        return self.param_type
+
+    @type_name.setter
+    def type_name(self, value: str) -> None:
+        self.param_type = value
 
 
 @dataclass
@@ -98,6 +121,15 @@ class FunctionDeclaration(ASTNode):
         self.identifier = identifier
         self.parameters = parameters
         self.body = body
+
+    @property
+    def name(self) -> str:
+        """Backward-compatible alias for identifier."""
+        return self.identifier
+
+    @name.setter
+    def name(self, value: str) -> None:
+        self.identifier = value
 
 
 @dataclass
@@ -167,6 +199,15 @@ class ReturnStatement(ASTNode):
         super().__init__(NodeType.RETURN_STMT, line, column)
         self.value = value
 
+    @property
+    def expression(self) -> Optional[Any]:
+        """Backward-compatible alias for value."""
+        return self.value
+
+    @expression.setter
+    def expression(self, value: Optional[Any]) -> None:
+        self.value = value
+
 
 @dataclass
 class ExpressionStatement(ASTNode):
@@ -189,6 +230,23 @@ class AssignmentExpression(ASTNode):
         super().__init__(NodeType.ASSIGN_EXPR, line, column)
         self.identifier = identifier
         self.value = value
+
+    @property
+    def expression(self) -> Any:
+        """Backward-compatible alias for value."""
+        return self.value
+
+    @expression.setter
+    def expression(self, value: Any) -> None:
+        self.value = value
+
+
+class AssignmentStatement(AssignmentExpression):
+    """Statement-form assignment kept for backwards-compatible parser APIs."""
+
+    def __init__(self, identifier: str, expression: Any,
+                 line: int = 0, column: int = 0):
+        super().__init__(identifier, expression, line, column)
 
 
 @dataclass
@@ -255,6 +313,13 @@ class Literal(ASTNode):
         self.literal_type = literal_type
 
 
+class IntegerLiteral(Literal):
+    """Integer literal compatibility node."""
+
+    def __init__(self, value: int, line: int = 0, column: int = 0):
+        super().__init__(value, "int", line, column)
+
+
 @dataclass
 class ReadStatement(ASTNode):
     """Read statement"""
@@ -273,3 +338,39 @@ class PrintStatement(ASTNode):
     def __init__(self, expression: Any, line: int = 0, column: int = 0):
         super().__init__(NodeType.PRINT_STMT, line, column)
         self.expression = expression
+
+
+def ast_to_string(node: Any, indent: int = 0) -> str:
+    """Convert AST nodes to a readable multi-line tree string."""
+    spacing = "  " * indent
+
+    if node is None:
+        return f"{spacing}None"
+
+    if isinstance(node, list):
+        if not node:
+            return f"{spacing}[]"
+        return "\n".join(ast_to_string(item, indent) for item in node)
+
+    if not isinstance(node, ASTNode):
+        return f"{spacing}{repr(node)}"
+
+    lines = [f"{spacing}{node.node_type.value}"]
+    for field_name, value in vars(node).items():
+        if field_name in {"node_type", "line", "column"}:
+            continue
+
+        if isinstance(value, ASTNode):
+            lines.append(f"{spacing}  {field_name}:")
+            lines.append(ast_to_string(value, indent + 2))
+        elif isinstance(value, list):
+            lines.append(f"{spacing}  {field_name}:")
+            if not value:
+                lines.append(f"{spacing}    []")
+            else:
+                for item in value:
+                    lines.append(ast_to_string(item, indent + 2))
+        else:
+            lines.append(f"{spacing}  {field_name}: {value!r}")
+
+    return "\n".join(lines)
