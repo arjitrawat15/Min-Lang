@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #2c3e50; }
+      .box { fill: #3498db; stroke: #2c3e50; stroke-width: 2; }
+      .box-complete { fill: #27ae60; stroke: #2c3e50; stroke-width: 2; }
+      .box-pending { fill: #e74c3c; stroke: #2c3e50; stroke-width: 2; }
+      .box-text { font: 14px sans-serif; fill: white; text-anchor: middle; }
+      .arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font: 12px sans-serif; fill: #7f8c8d; text-anchor: middle; }
+      .status { font: bold 11px sans-serif; fill: white; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" class="title">MinLang Compiler Architecture</text>
+  
+  <!-- Source Code -->
+  <rect x="325" y="60" width="150" height="50" rx="5" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2"/>
+  <text x="400" y="90" class="box-text" fill="#2c3e50">Source Code (.min)</text>
+  
+  <!-- Arrow to Lexer -->
+  <line x1="400" y1="110" x2="400" y2="140" class="arrow"/>
+  
+  <!-- Lexer (Complete) -->
+  <rect x="300" y="140" width="200" height="70" rx="5" class="box-complete"/>
+  <text x="400" y="165" class="box-text">Lexical Analyzer</text>
+  <text x="400" y="185" class="box-text">(Tokenizer)</text>
+  <text x="400" y="200" class="status">✓ COMPLETE</text>
+  
+  <!-- Output label -->
+  <text x="500" y="175" class="label">Token Stream</text>
+  
+  <!-- Arrow to Parser -->
+  <line x1="400" y1="210" x2="400" y2="240" class="arrow"/>
+  
+  <!-- Parser (30% Complete) -->
+  <rect x="300" y="240" width="200" height="70" rx="5" class="box"/>
+  <text x="400" y="265" class="box-text">Syntax Analyzer</text>
+  <text x="400" y="285" class="box-text">(Parser)</text>
+  <text x="400" y="300" class="status">30% COMPLETE</text>
+  
+  <!-- Output label -->
+  <text x="520" y="275" class="label">AST</text>
+  
+  <!-- Arrow to Semantic -->
+  <line x1="400" y1="310" x2="400" y2="340" class="arrow"/>
+  
+  <!-- Semantic Analyzer (Pending) -->
+  <rect x="300" y="340" width="200" height="70" rx="5" class="box-pending"/>
+  <text x="400" y="365" class="box-text">Semantic Analyzer</text>
+  <text x="400" y="385" class="box-text">(Type Checker)</text>
+  <text x="400" y="400" class="status">TODO</text>
+  
+  <!-- Output label -->
+  <text x="530" y="375" class="label">Annotated AST</text>
+  
+  <!-- Arrow to IR -->
+  <line x1="400" y1="410" x2="400" y2="440" class="arrow"/>
+  
+  <!-- IR Generator (Pending) -->
+  <rect x="300" y="440" width="200" height="70" rx="5" class="box-pending"/>
+  <text x="400" y="465" class="box-text">IR Generator</text>
+  <text x="400" y="485" class="box-text">(Three-Address Code)</text>
+  <text x="400" y="500" class="status">TODO</text>
+  
+  <!-- Output label -->
+  <text x="540" y="475" class="label">TAC Instructions</text>
+  
+  <!-- Arrow to Optimizer -->
+  <line x1="400" y1="510" x2="400" y2="540" class="arrow"/>
+  
+  <!-- Optimizer (Pending - Optional) -->
+  <rect x="300" y="540" width="200" height="70" rx="5" class="box-pending"/>
+  <text x="400" y="565" class="box-text">Optimizer</text>
+  <text x="400" y="585" class="box-text">(Optional)</text>
+  <text x="400" y="600" class="status">TODO</text>
+  
+  <!-- Output label -->
+  <text x="530" y="575" class="label">Optimized IR</text>
+  
+  <!-- Arrow to Codegen -->
+  <line x1="400" y1="610" x2="400" y2="640" class="arrow"/>
+  
+  <!-- Code Generator (Pending) -->
+  <rect x="300" y="640" width="200" height="70" rx="5" class="box-pending"/>
+  <text x="400" y="665" class="box-text">Code Generator</text>
+  <text x="400" y="685" class="box-text">(Target Emission)</text>
+  <text x="400" y="700" class="status">TODO</text>
+  
+  <!-- Output label -->
+  <text x="520" y="675" class="label">Target Code</text>
+  
+  <!-- Arrow to Output -->
+  <line x1="400" y1="710" x2="400" y2="740" class="arrow"/>
+  
+  <!-- Output File -->
+  <rect x="325" y="740" width="150" height="50" rx="5" fill="#ecf0f1" stroke="#95a5a6" stroke-width="2"/>
+  <text x="400" y="770" class="box-text" fill="#2c3e50">Output Code</text>
+  
+  <!-- Supporting Components Box -->
+  <rect x="50" y="300" width="200" height="200" rx="5" fill="#f39c12" stroke="#2c3e50" stroke-width="2" opacity="0.9"/>
+  <text x="150" y="325" class="box-text">Supporting Components</text>
+  
+  <!-- Error Handler -->
+  <rect x="70" y="340" width="160" height="40" rx="3" fill="#e67e22" stroke="#2c3e50" stroke-width="1"/>
+  <text x="150" y="365" class="box-text" font-size="12">Error Handler</text>
+  
+  <!-- Symbol Table -->
+  <rect x="70" y="390" width="160" height="40" rx="3" fill="#e67e22" stroke="#2c3e50" stroke-width="1"/>
+  <text x="150" y="415" class="box-text" font-size="12">Symbol Table</text>
+  
+  <!-- Logger -->
+  <rect x="70" y="440" width="160" height="40" rx="3" fill="#e67e22" stroke="#2c3e50" stroke-width="1"/>
+  <text x="150" y="465" class="box-text" font-size="12">Logger / Utilities</text>
+  
+  <!-- Legend -->
+  <text x="50" y="840" font="bold 14px sans-serif" fill="#2c3e50">Legend:</text>
+  
+  <rect x="50" y="850" width="30" height="20" fill="#27ae60" stroke="#2c3e50" stroke-width="1"/>
+  <text x="90" y="865" font="12px sans-serif" fill="#2c3e50">Complete</text>
+  
+  <rect x="200" y="850" width="30" height="20" fill="#3498db" stroke="#2c3e50" stroke-width="1"/>
+  <text x="240" y="865" font="12px sans-serif" fill="#2c3e50">In Progress</text>
+  
+  <rect x="380" y="850" width="30" height="20" fill="#e74c3c" stroke="#2c3e50" stroke-width="1"/>
+  <text x="420" y="865" font="12px sans-serif" fill="#2c3e50">TODO</text>
+  
+  <!-- Version Info -->
+  <text x="700" y="890" font="10px sans-serif" fill="#95a5a6" text-anchor="end">v0.3.0 - Feb 2026</text>
+</svg>

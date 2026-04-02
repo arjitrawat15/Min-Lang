@@ -1,0 +1,38 @@
+// Simple Calculator Program
+// Demonstrates arithmetic operations and functions
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int main() {
+    int x;
+    int y;
+    int sum;
+    int diff;
+    int prod;
+    
+    // Read two numbers
+    read(x);
+    read(y);
+    
+    // Perform calculations
+    sum = add(x, y);
+    diff = subtract(x, y);
+    prod = multiply(x, y);
+    
+    // Print results
+    print(sum);
+    print(diff);
+    print(prod);
+    
+    return 0;
+}
