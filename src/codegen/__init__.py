@@ -1,10 +1,18 @@
 """
-Code Generation Package for MinLang Compiler
-
-TODO: To be implemented by team members
-- IR (Three-Address Code) generation
-- Optimization passes
-- Target code generation
+Code Generation package for MinLang Compiler
 """
 
-# Placeholder for future implementation
+from .intermediate import (
+    TACOpcode, TACInstruction, TACProgram, format_tac_output
+)
+from .generator import IRGenerator, IRGeneratorError, generate_tac
+
+__all__ = [
+    'TACOpcode',
+    'TACInstruction',
+    'TACProgram',
+    'format_tac_output',
+    'IRGenerator',
+    'IRGeneratorError',
+    'generate_tac',
+]
