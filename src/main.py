@@ -15,9 +15,10 @@ sys.path.insert(0, str(Path(__file__).parent))
 from lexer import Lexer, LexerError
 from parser import Parser, ParserError
 from semantic import SemanticAnalyzer
+from codegen import generate_tac, format_tac_output
 
 # Version information
-VERSION = "0.6.0"  # 60% Complete (Phases 1-3)
+VERSION = "0.8.0"  # 80% Complete (Phases 1-4)
 COMPILER_NAME = "MinLang Compiler"
 
 
@@ -159,15 +160,28 @@ def compile_file(filename: str, args: argparse.Namespace) -> bool:
             print(f"  ✓ Symbol table constructed")
             print(f"  ✓ Semantic analysis passed\n")
         
-        # Phase 4-6: Not yet implemented
+        # Phase 4: Intermediate Code Generation
         if args.verbose:
-            print("Phase 4: Intermediate Code Generation (TODO)")
+            print("Phase 4: Intermediate Code Generation")
+        
+        tac_program = generate_tac(ast, analyzer.symbol_table)
+        
+        if args.tac:
+            print(format_tac_output(tac_program))
+        
+        if args.verbose:
+            print(f"  ✓ Generated {len(tac_program.instructions)} TAC instructions")
+            print(f"  ✓ Used {tac_program.temp_count} temporary variables")
+            print(f"  ✓ Created {tac_program.label_count} labels\n")
+        
+        # Phase 5-6: Not yet implemented
+        if args.verbose:
             print("Phase 5: Optimization (TODO)")
             print("Phase 6: Code Generation (TODO)")
         
         if args.verbose or not args.quiet:
             print(f"\n✓ Compilation completed successfully")
-            print(f"   Phases 1-3 complete (Lexing, Parsing, Semantic Analysis)")
+            print(f"   Phases 1-4 complete (Lexing, Parsing, Semantic, IR Generation)")
             print(f"   No errors found!")
         
         return True
@@ -192,8 +206,8 @@ def main():
     """Main entry point for the compiler"""
     parser = argparse.ArgumentParser(
         prog='minlang',
-        description=f'{COMPILER_NAME} v{VERSION} - Educational compiler for MinLang (60% Complete)',
-        epilog='Phases 1-3 implemented: Lexical Analysis, Syntax Analysis, Semantic Analysis'
+        description=f'{COMPILER_NAME} v{VERSION} - Educational compiler for MinLang (80% Complete)',
+        epilog='Phases 1-4 implemented: Lexical, Syntax, Semantic Analysis, IR Generation'
     )
     
     # Required arguments
@@ -206,7 +220,7 @@ def main():
     parser.add_argument(
         '--version',
         action='version',
-        version=f'{COMPILER_NAME} v{VERSION} (60%% Complete - Phases 1-3)'
+        version=f'{COMPILER_NAME} v{VERSION} (80%% Complete - Phases 1-4)'
     )
     
     parser.add_argument(
@@ -242,7 +256,7 @@ def main():
     parser.add_argument(
         '--tac',
         action='store_true',
-        help='print three-address code (not yet implemented)'
+        help='print three-address code (intermediate representation)'
     )
     
     parser.add_argument(
